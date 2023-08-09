@@ -76,7 +76,7 @@ class Api(BaseSupersetView):
     @expose("/chat-gpt", methods=("GET",))
     def ask_chat_gpt(self, **kwargs) -> FlaskResponse:
         def call_api3(prompt_text):
-            api_key = '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'
+            api_key = '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'
             api_url = '/v1/chat/completions'
             payload = {
                 "model": "gpt-3.5-turbo",
