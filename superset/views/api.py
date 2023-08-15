@@ -76,18 +76,29 @@ class Api(BaseSupersetView):
     @expose("/chat-gpt", methods=("GET",))
     def ask_chat_gpt(self, **kwargs) -> FlaskResponse:
         def call_api3(prompt_text):
-            api_key = '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'
+            api_key = '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'
             api_url = '/v1/chat/completions'
             payload = {
                 "model": "gpt-3.5-turbo",
                 "messages": [
                     {
                         "role": "system",
-                        "content": "I have table hive.blockchain_datawarehouse.dim_address_v2 schema id string,is_contract boolean,contract_type string,network_id int and table hive.blockchain_datawarehouse.dim_network_v2 schema id bigint,raw_id int,network_name string,chain_id int,chain_name string,chain_type string and table hive.blockchain_datawarehouse.dim_token_v2 schema id string,type string,token_name string,network_id int and table hive.blockchain_datawarehouse.fact_block_v2 schema block_id bigint,hash string,created_at timestamp,network_id int,date string and table hive.blockchain_datawarehouse.fact_transaction_detail_v2 schema tran_id string,index int,sender_address_id string,receiver_address_id string,value decimal(38,0),token_id string,type string,network_id int,date string and table hive.blockchain_datawarehouse.fact_transaction_v2 schema tran_id string,block_id bigint,size bigint,created_at timestamp,network_id int,date string stored in Trino. When I ask for any queries, just response with that query only, do not explain any further."
+                        "content": "I have table hive.blockchain_datawarehouse.dim_address_v2 schema id string,is_contract boolean,contract_type string,network_id int and\
+                        table hive.blockchain_datawarehouse.dim_network_v2 schema id bigint,raw_id int,network_name string,chain_id int,chain_name string,chain_type string and \
+                        table hive.blockchain_datawarehouse.dim_token_v2 schema id string,type string,token_name string,network_id int and \
+                        table hive.blockchain_datawarehouse.fact_block_v2 schema block_id bigint,hash string,created_at timestamp,network_id int,date string and \
+                        table hive.blockchain_datawarehouse.fact_transaction_detail_v2 schema tran_id string,index int,sender_address_id string,receiver_address_id string,value decimal(38,0),token_id string,type string,network_id int,date string and \
+                        table hive.blockchain_datawarehouse.fact_transaction_v2 schema tran_id string,block_id bigint,size bigint,created_at timestamp,network_id int,date string stored \
+                        in Trino. When I ask for any queries, just response with that query only, do not explain any further."
                     },
                     {
                         "role": "system",
-                        "content": "To get smart contract, dim_address_v2.is_contract = TRUE. Token type includes 'native' and 'default'. Transaction type includes 'NFT', 'DEFI', 'TRANSFER', 'UNKNOWN'. Transaction type will be available only on fact_transaction_detail_v2, NOT fact_transaction_v2. Token type will be available only on dim_token_v2. Normally user will define network by network_name in dim_network_v2. Column network_name contains 'Optimism', 'Binance Smart Chain', 'Polygon', 'Fantom', 'Arbitrum', 'Celo', 'Avalanche', 'Cardano', 'Ethereum'. When user asks for query in a period of time, always use structure 'between ... and ...'."
+                        "content": "To get smart contract, dim_address_v2.is_contract = TRUE. Token type includes 'native' and 'default'. \
+                        Transaction type includes 'NFT', 'DEFI', 'TRANSFER', 'UNKNOWN'. \
+                        Transaction type will be available only on fact_transaction_detail_v2, NOT fact_transaction_v2. \
+                        Token type will be available only on dim_token_v2. Normally user will define network by network_name in dim_network_v2. \
+                        Column network_name contains 'Optimism', 'Binance Smart Chain', 'Polygon', 'Fantom', 'Arbitrum', 'Celo', 'Avalanche', 'Cardano', 'Ethereum'. \
+                        When user asks for query in a period of time, always use structure 'between ... and ...'."
                     },
                     {
                         "role": "user",

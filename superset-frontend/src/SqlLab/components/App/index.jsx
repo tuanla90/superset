@@ -110,7 +110,7 @@ class App extends React.PureComponent {
     super(props);
     this.state = {
       hash: window.location.hash,
-      promtText: "",
+      promtText: "Total transaction from network Etherium in January 2023",
       sqlResult: ""
     };
 
@@ -234,18 +234,60 @@ class App extends React.PureComponent {
     if (this.state.hash && this.state.hash === '#search') {
       return window.location.replace('/superset/sqllab/history/');
     }
+    const containerStyle = {
+      display: 'flex',
+      alignItems: 'top',
+    };
+  
+    const inputStyle = {
+      flex: 1,
+      padding: '8px',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      height: '40px',
+      'max-height': '150px',
+      'min-height': '40px',
+      'font-size': "small"
+    };
+  
+    const buttonStyle = {
+      backgroundColor: '#4CAF50',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '8px 16px',
+      height: '40px',
+      cursor: 'pointer',
+    };
+  
+    const textAreaStyle = {
+      flex: 1,
+      marginLeft: '8px',
+      padding: '8px',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      height: '40px',
+      backgroundColor: '#f4f4f4',
+      'max-height': '150px',
+      'min-height': '40px',
+      'font-size': "small"
+    };
     return (
       <SqlLabStyles data-test="SqlLabApp" className="App SqlLab">
-        <div class="input-container">
-          <input
+        <div style={containerStyle}>
+          <textarea
             type="text"
             id="message-input"
             placeholder="Type your message..."
             value={this.state.promtText}
             onChange={(e) => this.changePromt(this, e)}
-          ></input>
-          <button id="send-button" onClick={sendToChatGPT}>Send</button>
-          <textarea id="message-output" rows="4" placeholder="Received messages..." value={this.state.sqlResult} readonly></textarea>
+            style={inputStyle}
+          ></textarea>
+          <button id="send-button" onClick={sendToChatGPT} style={buttonStyle} 
+          >Send</button>
+          <textarea id="message-output" rows="4" placeholder="Received messages..." value={this.state.sqlResult} readonly
+          style={textAreaStyle}
+          ></textarea>
         </div>
         <QueryAutoRefresh
           queries={queries}
